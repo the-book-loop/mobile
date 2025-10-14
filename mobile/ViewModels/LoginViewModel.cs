@@ -30,10 +30,8 @@ namespace mobile.ViewModels
                 return;
             }
 
-            // Тимчасово — успішний логін
+           
             await App.Current.MainPage.DisplayAlert("Success", $"Welcome, {Username}!", "OK");
-
-            // Перехід на головний екран
             await Shell.Current.GoToAsync("///MainApp");
         }
     }

@@ -21,8 +21,23 @@
      ContentTemplate="{DataTemplate views:CreateAccountPage}"
      Route="CreateAccountPage"
      IsVisible="False"/>
-    
+
     <TabBar Route="MainApp">
-       
+        <ShellContent
+            Title="Discover"
+            Icon="discover_icon.png"
+            ContentTemplate="{DataTemplate views:MainPage}" />
+        <ShellContent
+            Title="Matches"
+            Icon="matches_icon.png"
+            ContentTemplate="{DataTemplate views:MatchesPage}" />
+        <ShellContent
+            Title="Chat"
+            Icon="chat_icon.png"
+            ContentTemplate="{DataTemplate views:ChatPage}" />
+        <ShellContent
+            Title="Profile"
+            Icon="profile_icon.png"
+            ContentTemplate="{DataTemplate views:AccountPage}" />
     </TabBar>
 </Shell>

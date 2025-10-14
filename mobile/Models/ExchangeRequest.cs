@@ -15,11 +15,11 @@ namespace mobile.Models
     }
     public class ExchangeRequest
     {
-        public int Id { get; set; }
-        public int RequestingUserId { get; set; }
-        public int RequestedUserId { get; set; }
-        public int BookOfferedId { get; set; }
-        public int BookRequestedId { get; set; }
+        public Guid Id { get; set; }
+        public Guid RequestingUserId { get; set; }
+        public Guid RequestedUserId { get; set; }
+        public Guid BookOfferedId { get; set; }
+        public Guid BookRequestedId { get; set; }
         public RequestStatus Status { get; set; }
         public DateTime DateRequested { get; set; }
     }

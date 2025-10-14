@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobile.Views.AccountPage"
+             xmlns:vm="clr-namespace:mobile.ViewModels"
+             Title="Profile"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#EFEFE7">
+
+    <ContentPage.Resources>
+ 
+        <Style x:Key="CardView" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Stroke" Value="#E0E0E0"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="20"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:AccountViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="0.13*, 0.87*" IgnoreSafeArea="True">
+        <Grid Grid.Row="0">
+            <Path Fill="#011166" Aspect="Fill"  Data="M0,0 
+              L0,160 
+              C350,800 450,-280 800,290 
+              L800,0 Z"/>
+        </Grid>
+        <ScrollView Grid.Row="1" Margin="0">
+            <VerticalStackLayout Spacing="15" Padding="20">
+                
+                <Grid Padding="0" ColumnDefinitions="Auto, *" ColumnSpacing="15">
+                    <Border WidthRequest="90" HeightRequest="90" Stroke="#D0D0D0" StrokeThickness="3">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="45"/>
+                        </Border.StrokeShape>
+                        <Image Source="default_avatar.png" Aspect="AspectFill" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="5">
+                        <Label Text="{Binding CurrentUser.FullName}" TextColor="#011166" FontSize="22" FontAttributes="Bold"/>
+                        <HorizontalStackLayout Spacing="5">
+                            <Image Source="star_icon.png" HeightRequest="16"/>
+                            <Label Text="{Binding CurrentUser.Rating}" TextColor="#011166" FontAttributes="Bold" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Border Style="{StaticResource CardView}">
+                    <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="10">
+                        <Grid Grid.Row="0" ColumnDefinitions="*, Auto">
+                            <Label Text="About" FontSize="20" FontAttributes="Bold" TextColor="#011166"/>
+                            <Grid Grid.Column="1" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="0,0,10,0">
+                                <ImageButton Source="settings_icon.png"
+                     Command="{Binding EditProfileCommand}"
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Aspect="AspectFit"/>
+                            </Grid>
+                        </Grid>
+
+                        <Label Grid.Row="1" Text="{Binding DisplayedAbout}" LineBreakMode="WordWrap" TextColor="#011166">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleAboutCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <FlexLayout Grid.Row="2" BindableLayout.ItemsSource="{Binding CurrentUser.FavoriteGenres}" Wrap="Wrap" Margin="0,10,0,0">
+                            <Label Text="About" FontSize="20" FontAttributes="Bold" TextColor="#011166"/>
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Border BackgroundColor="#EEF1FF"
+                                            Stroke="#011166"
+                                            StrokeShape="RoundRectangle 10"
+                                            Padding="6,2" Margin="3">
+                                        <Label Text="{Binding .}" TextColor="#011166" FontSize="14"/>
+                                    </Border>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </Grid>
+                </Border>
+
+                <Border Style="{StaticResource CardView}">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Activity" FontSize="20" FontAttributes="Bold" TextColor="#011166"/>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Text="My Books" VerticalOptions="Center" TextColor="#011166"/>
+                            <Image Source="arrow_right_icon.png" Grid.Column="1" HeightRequest="20"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding MyBooksCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <BoxView HeightRequest="1" Color="#E0E0E0"/>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Text="Books Wishlist" VerticalOptions="Center" TextColor="#011166"/>
+                            <Image Source="arrow_right_icon.png" Grid.Column="1" HeightRequest="20"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BooksWishlistCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <BoxView HeightRequest="1" Color="#E0E0E0"/>
+
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Text="My Shared Books" VerticalOptions="Center" TextColor="#011166"/>
+                            <Image Source="arrow_right_icon.png" Grid.Column="1" HeightRequest="20"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding MySharedBooksCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button Text="Log out" Command="{Binding LogoutCommand}" Margin="0,10,0,0"
+                        BackgroundColor="#011166" TextColor="White" CornerRadius="25" HeightRequest="48"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

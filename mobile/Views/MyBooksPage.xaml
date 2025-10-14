@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobile.Views.MyBooksPage"
+             xmlns:vm="clr-namespace:mobile.ViewModels"
+             xmlns:models="clr-namespace:mobile.Models"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#EFEFE7">
+
+    <ContentPage.BindingContext>
+        <vm:MyBooksViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="0.2*, 0.8*" IgnoreSafeArea="True">
+
+        <Path Grid.Row="0" Fill="#011166" Aspect="Fill" Data="M0,0 L0,100 C150,150 300,50 500,100 L500,0 Z" />
+
+        <ImageButton Source="arrow_left.png" Command="{Binding GoBackCommand}"
+                     HorizontalOptions="Start" VerticalOptions="Start"
+                     HeightRequest="24" WidthRequest="24" Margin="20,25"/>
+
+        <Grid Grid.Row="1" RowDefinitions="Auto, *">
+
+        
+            <VerticalStackLayout Spacing="15" Padding="20">
+                <Label Text="My Books" Style="{StaticResource PageTitle}" />
+            </VerticalStackLayout>
+
+            <CollectionView Grid.Row="1" ItemsSource="{Binding UserBooks}" Margin="15,0">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Book">
+                        <Border Style="{StaticResource CardView}">
+                            <Grid Padding="10" ColumnSpacing="15" ColumnDefinitions="Auto, *, Auto" BackgroundColor="White">
+                                
+                                <Image Source="{Binding ImageUrl}" 
+                                       Aspect="AspectFill" 
+                                       HeightRequest="110" 
+                                       WidthRequest="75"/>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                                    <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" LineBreakMode="TailTruncation" TextColor="#011166"/>
+                                    <Label Text="{Binding Author}" TextColor="#011166"/>
+                                    <Label Text="{Binding Description}" 
+                                           TextColor="#011166" 
+                                           LineBreakMode="TailTruncation" 
+                                           MaxLines="2"/>
+                                </VerticalStackLayout>
+
+                                <Image Grid.Column="2" 
+                                       Source="arrow_right_icon.png" 
+                                       HeightRequest="20" 
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Grid.Row="1" Text="+" FontSize="32" Command="{Binding AddBookCommand}"
+                    Style="{StaticResource ActionButton}"
+                    CornerRadius="30" HeightRequest="60" WidthRequest="60"
+                    HorizontalOptions="End" VerticalOptions="End" Margin="20"/>
+        </Grid>
+    </Grid>
+</ContentPage>
+
