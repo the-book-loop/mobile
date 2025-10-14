@@ -16,6 +16,11 @@
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage"
         IsVisible="False"/>
+
+    <ShellContent
+     ContentTemplate="{DataTemplate views:CreateAccountPage}"
+     Route="CreateAccountPage"
+     IsVisible="False"/>
     
     <TabBar Route="MainApp">
        

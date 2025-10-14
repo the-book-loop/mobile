@@ -18,22 +18,23 @@ namespace mobile.ViewModels
         public LoginViewModel()
         {
             LoginCommand = new Command(OnLogin);
-            SignUpCommand = new Command(OnSignUp);
         }
 
         private async void OnLogin()
         {
             //TODO: API request
+        
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Please enter both username and password", "OK");
+                return;
+            }
 
-            // Temporarily
-            await App.Current.MainPage.DisplayAlert("Success", "You have logged in!", "OK");
+            // Тимчасово — успішний логін
+            await App.Current.MainPage.DisplayAlert("Success", $"Welcome, {Username}!", "OK");
+
+            // Перехід на головний екран
             await Shell.Current.GoToAsync("///MainApp");
-        }
-
-        private async void OnSignUp()
-        {
-            // registerPage
-           // await Shell.Current.GoToAsync($"../{nameof(CreateAccountPage)}");
         }
     }
 }

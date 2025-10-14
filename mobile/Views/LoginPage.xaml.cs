@@ -1,5 +1,5 @@
 using Microsoft.Maui.Controls;
-
+using mobile.ViewModels;
 namespace mobile.Views;
 
 public partial class LoginPage : ContentPage
@@ -7,6 +7,7 @@ public partial class LoginPage : ContentPage
     public LoginPage()
     {
         InitializeComponent();
+        BindingContext = new LoginViewModel();
     }
 
     protected override void OnAppearing()
@@ -62,7 +63,21 @@ public partial class LoginPage : ContentPage
 
         animation.Commit(this, "WaveUpAnimation", 16, 900, Easing.CubicInOut, async (finalValue, isCompleted) =>
         {
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("///LandingPage", animate: false);
         });
+    }
+    private async void GoToCreateAccount(object sender, TappedEventArgs e)
+    {
+        await Task.WhenAll(
+       WelcomeLabel.FadeTo(0, 300, Easing.CubicInOut),
+       InfoLabel.FadeTo(0, 300, Easing.CubicInOut),
+       UsernameBorder.FadeTo(0, 300, Easing.CubicInOut),
+       PasswordBorder.FadeTo(0, 300, Easing.CubicInOut),
+       LoginButton.FadeTo(0, 300, Easing.CubicInOut),
+       BackButton.FadeTo(0, 300, Easing.CubicInOut),
+       SignUp.FadeTo(0, 300, Easing.CubicInOut)
+        );
+
+        await Shell.Current.GoToAsync(nameof(CreateAccountPage), animate: false);
     }
 }

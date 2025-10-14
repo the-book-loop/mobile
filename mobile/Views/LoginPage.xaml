@@ -1,8 +1,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:mobile.ViewModels"
              x:Class="mobile.Views.LoginPage"
              Shell.NavBarIsVisible="False"
              BackgroundColor="#F5F5F5">
+    
 
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -35,10 +37,10 @@
                 <Label x:Name="InfoLabel" Text="Please login to our app" FontSize="16" TextColor="Gray" HorizontalOptions="Center" Margin="0,0,0,30" Opacity="0" Scale="0.95"/>
 
                 <Border Style="{StaticResource InputFrame}" Opacity="0" x:Name="UsernameBorder">
-                    <Entry Placeholder="Username" Style="{StaticResource InputEntry}"/>
+                    <Entry Placeholder="Username" Style="{StaticResource InputEntry} " Text="{Binding Username}"/>
                 </Border>
                 <Border Style="{StaticResource InputFrame}" Opacity="0" x:Name="PasswordBorder">
-                    <Entry Placeholder="Password" IsPassword="True" Style="{StaticResource InputEntry}"/>
+                    <Entry Placeholder="Password" IsPassword="True" Style="{StaticResource InputEntry}" Text="{Binding Password}"/>
                 </Border>
 
                 <Button x:Name="LoginButton" Text="Log In" Command="{Binding LoginCommand}" Style="{StaticResource ActionButton}" Opacity="0" Scale="0.95"/>
@@ -47,7 +49,7 @@
                     <Label Text="Don't have an account? " VerticalOptions="Center"/>
                     <Label Text="SIGN UP" TextColor="#011166" FontAttributes="Bold" VerticalOptions="Center">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
+                            <TapGestureRecognizer Tapped="GoToCreateAccount"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>

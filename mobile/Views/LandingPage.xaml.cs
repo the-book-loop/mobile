@@ -40,7 +40,7 @@ public partial class LandingPage : ContentPage
     }
     private void OnCreateAccountClicked(object sender, EventArgs e)
     {
-       // AnimateFadeAndWave(nameof(CreateAccountPage));
+       AnimateFadeAndWave(nameof(CreateAccountPage));
     }
 
     private void OnSignInClicked(object sender, EventArgs e)

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobile.Views.CreateAccountPage"
+             xmlns:vm="clr-namespace:mobile.ViewModels"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F5F5F5">
+
+    <ContentPage.BindingContext>
+        <vm:CreateAccountViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="WaveRow" Height="0.2*" />
+            <RowDefinition x:Name="ContentRow" Height="0.8*" />
+        </Grid.RowDefinitions>
+
+        <Path Grid.Row="0"
+              x:Name="WavePath"
+              Fill="#011166"
+              Aspect="Fill"
+              Data="M0,0 L0,100 C150,150 300,50 500,100 L500,0 Z" />
+
+        <ImageButton Source="arrow.png"
+               x:Name="BackButton"
+               Clicked="OnBackClicked"
+               BackgroundColor="Transparent"
+               WidthRequest="40"
+               HeightRequest="40"
+               Padding="8"
+               HorizontalOptions="Start"
+               VerticalOptions="Start"
+               Margin="15,40,0,0"
+               Opacity="0"
+               Scale="0.95"/>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="40,0" Spacing="15">
+                <Label x:Name="WelcomeLabel" Text="Welcome!" FontSize="32" FontAttributes="Bold" TextColor="#011166" HorizontalOptions="Center" Opacity="0" Scale="0.95"/>
+                <Label x:Name="InfoLabel" Text="Create an account to join bookloop" FontSize="16" TextColor="Gray" HorizontalOptions="Center" Margin="0,0,0,20" Opacity="0" Scale="0.95"/>
+
+                <Border Style="{StaticResource InputFrame}" Opacity="0" x:Name="UsernameBorder">
+                    <Entry Placeholder="Username" Text="{Binding Username}" Style="{StaticResource InputEntry}"/>
+                </Border>
+                <Border Style="{StaticResource InputFrame}" Opacity="0" x:Name="EmailBorder">
+                    <Entry Placeholder="E-mail" Keyboard="Email" Text="{Binding Email}" Style="{StaticResource InputEntry}"/>
+                </Border>
+                <Border Style="{StaticResource InputFrame}" Opacity="0" x:Name="PasswordBorder">
+                    <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" Style="{StaticResource InputEntry}"/>
+                </Border>
+
+                <Button x:Name="CreateButton" Text="Create" Command="{Binding CreateAccountCommand}" Style="{StaticResource ActionButton}" Opacity="0" Scale="0.95"/>
+
+                <StackLayout x:Name="SignInLayout" Orientation="Horizontal" HorizontalOptions="Center" Opacity="0" Margin="0,20,0,0">
+                    <Label Text="Already have an account? " VerticalOptions="Center"/>
+                    <Label Text="SIGN IN" TextColor="#011166" FontAttributes="Bold" VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GoToSignIn"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
+

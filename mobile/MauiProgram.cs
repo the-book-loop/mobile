@@ -20,6 +20,8 @@ namespace mobile
     		builder.Logging.AddDebug();
 #endif
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(CreateAccountPage), typeof(CreateAccountPage));
+            Routing.RegisterRoute(nameof(LandingPage), typeof(LandingPage));
             
             return builder.Build();
         }
